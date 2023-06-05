@@ -13,6 +13,12 @@ const rootReducer = (state = initState, action)=>{
             num: state.num + 1
         }
     }
+    if (action.type === 'DEC_NUM'){
+        return{
+            ...state,
+            num: state.num - 1
+        }
+    }
 
     if (action.type === 'ADD_NUM'){
         return{
@@ -26,17 +32,23 @@ const rootReducer = (state = initState, action)=>{
 //Store
 const store = redux.createStore(rootReducer);
 
+
 console.log(store.getState());
+//Subscribe
+store.subscribe(()=>{
+    console.log('Subscribe', store.getState());
+})
 
 
 //Dispatching Action
 store.dispatch({
     type: 'INC_NUM'
 })
-
 store.dispatch({
     type: 'ADD_NUM',
     value: 35
 })
+store.dispatch({
+    type: 'DEC_NUM',
+})
 
-console.log(store.getState());
